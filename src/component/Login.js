@@ -159,7 +159,7 @@ const Login = () => {
                             </div>
                             <button className="btn" type="submit">Đăng ký</button>
                             <div className="create-account">
-                                <p>Bạn có sẵn sàng để tạo một tài khoản? <a href="#" className="login-link">Đăng nhập</a></p>
+                                <p>Bạn đã có tài khoản? <a href="#" className="login-link">Đăng nhập</a></p>
                             </div>
                         </form>
                     </div>
