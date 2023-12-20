@@ -14,6 +14,7 @@ const Dashboard = () => {
     const [expenseInUser, setExpenseInUser] = useState({});
     const [categories, setCategories] = useState([]);
     const [load, setLoad] = useState(true);
+    const [isSpending, setIsSpending] = useState(false);
     useEffect(() => {
         ManageService.TotalInputMonth().then((response) => {
             returnTotalInputMonth()
@@ -46,13 +47,24 @@ const Dashboard = () => {
         })
     }
     const handleIncrement = () => {
-        // Implement the logic to increment the value
-        // Example: setTotalInputThisMonth(prevValue => prevValue + 1);
+
     };
     const handleDecrement = () => {
-        // Implement the logic to decrement the value
-        // Example: setTotalInputThisMonth(prevValue => prevValue - 1);
+        if(isSpending === false){
+            setIsSpending(true)
+        }else {
+            setIsSpending(false)
+        }
     };
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lắng nghe sự kiện click trên tiêu đề danh mục chính
+        document.querySelectorAll("#div-formSpending > div > h2").forEach(function (header) {
+            header.addEventListener("click", function () {
+                // Toggle class "expanded" để ẩn/hiện danh sách danh mục con
+                this.parentElement.classList.toggle("expanded");
+            });
+        });
+    });
     return (
         <div>
             {/* Card widget */}
@@ -74,9 +86,6 @@ const Dashboard = () => {
                     subtitle={`$${expenseInUser !== null ? expenseInUser.totalAmount : ''}`}
                 />
             </div>
-
-            {/* Charts */}
-
             <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
                 <TotalSpent/>
                 <div style={{display: "flex"}}>
@@ -96,18 +105,21 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-                <div id="div-formSpending">
-                    {categories.map((category) => (
-                        <div key={category.id}>
-                            <h2 style={{marginLeft : "10px"}}>{category.name}</h2>
-                            <ul>
-                                {category.nameCategories.map((subCategory) => (
-                                    <li style={{marginLeft : "40px"}} key={subCategory.id}>{subCategory.name}</li>
-                                ))}
-                            </ul>
+                {
+                    isSpending ? <div id="div-formSpending" style={{}}>
+                            {categories.map((category) => (
+                                <div key={category.id}>
+                                    <h2 className={"h2-categories"}>{category.name}</h2>
+                                    <ul>
+                                        {category.nameCategories.map((subCategory) => (
+                                            <li className={"li-categories"} key={subCategory.id}>{subCategory.name}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                        : <></>
+                }
 
             </div>
             <div className="mt-5 grid grid-cols-1 gap-5 xl:grid-cols-2">

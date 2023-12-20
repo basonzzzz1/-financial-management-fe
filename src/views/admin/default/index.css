@@ -31,66 +31,48 @@
 .action-button:hover {
     background-color: #3000ff !important;
 }
-/* CSS cho danh mục chính */
 #div-formSpending {
-    display: flex;
-    flex-direction: column;
-}
-
-/* CSS cho từng danh mục */
-#div-formSpending > div {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ffffff;
-    border-radius: 8px;
-    background-color: #ffffff;
-}
-
-/* CSS cho tên của danh mục chính */
-#div-formSpending > div > h2 {
-    color: #333;
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-/* CSS cho danh sách danh mục con */
-#div-formSpending > div > ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* CSS cho từng danh mục con */
-#div-formSpending > div > ul > li {
-    margin-bottom: 5px;
-    font-size: 14px;
-}
-
-/* CSS cho hover effect */
-#div-formSpending > div:hover {
-    background-color: #d6ddef;
-    transition: background-color 0.3s ease;
-}
-
-#div-formSpending{
     width: 250px;
     height: 540px;
-    /*border: 1px solid black;*/
     transform: translateX(910px) translateY(60px);
     position: absolute;
+    border-radius: 8px;
+    background-color: white;
     overflow-y: scroll;
-}
-#div-formSpending ::-webkit-scrollbar {
-    display: none;
-}
-/* Thêm biểu tượng mũi tên */
-#div-formSpending > div > h2::after {
-    content: "\25BC"; /* Mã Unicode cho mũi tên xuống */
-    float: right;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+    -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: transparent transparent; /* For Firefox */
 }
 
-/* Biểu tượng khi đang mở rộng */
-#div-formSpending > div.expanded > h2::after {
-    transform: rotate(180deg);
+#div-formSpending::-webkit-scrollbar {
+    width: 0.5em; /* Adjust scrollbar width as needed */
+}
+
+#div-formSpending::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Hide scrollbar thumb in WebKit browsers */
+}
+/*#div-formSpending{*/
+/*    width: 250px;*/
+/*    height: 540px;*/
+/*    !*border: 1px solid black;*!*/
+/*    transform: translateX(910px) translateY(60px);*/
+/*    position: absolute;*/
+/*    border-radius: 8px;*/
+/*    background-color: white;*/
+/*    overflow-y: scroll;*/
+/*    -ms-overflow-style: none;*/
+
+/*}*/
+/*#div-formSpending ::-webkit-scrollbar{*/
+/*    display: none;*/
+/*}*/
+.h2-categories{
+    margin-left: 10px;
+    background-color: #f2f2ff;
+    border-radius: 5px;
+    text-align: center;
+}
+.li-categories{
+    margin-left: 10px;
+    text-align: center;
 }

@@ -89,7 +89,6 @@ const TotalSpent = () => {
     console.log("34536")
     console.log(lineChartData123)
   }
-
   return (
     <Card extra="!p-[20px] text-center">
       <div className="flex justify-between">
@@ -110,7 +109,6 @@ const TotalSpent = () => {
           <div className="flex flex-col items-start">
             <p className="mt-2 text-sm text-gray-600">Total Spent</p>
             <div className="flex flex-row items-center justify-center">
-
               {percentageChange > 50 ?
                   <>
                     <MdArrowDropUp className="font-medium text-green-500" />
@@ -126,7 +124,6 @@ const TotalSpent = () => {
                     </p>
                   </>
               }
-
             </div>
           </div>
         </div>
