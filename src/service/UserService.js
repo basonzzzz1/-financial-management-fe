@@ -1,5 +1,5 @@
 import Axios from "../config/axiosConfig";
-import {LOGIN, REGISTER,} from "../API/api";
+import {LOGIN, REGISTER, TotalInputThisMonth,} from "../API/api";
 
 const UserService = {
     login: async (user) => {

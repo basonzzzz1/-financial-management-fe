@@ -1,3 +1,6 @@
+import ManageService from "../service/ManageService";
+import {useEffect} from "react";
+
 export const barChartDataDailyTraffic = [
   {
     name: "Daily Traffic",
@@ -6,6 +9,7 @@ export const barChartDataDailyTraffic = [
 ];
 
 export const barChartOptionsDailyTraffic = {
+
   chart: {
     toolbar: {
       show: false,
@@ -255,17 +259,29 @@ export const barChartOptionsWeeklyRevenue = {
     },
   },
 };
-
+var Revenue = [0,0,0,0,0,0,0,0,0,0,0,0];
+const returnGetYearlyRevenues = () => {
+  ManageService.GetYearlyRevenues().then((response) => {
+    var data = response.data;
+    for (let i = 0; i < Revenue.length+1; i++) {
+      for (let j = 0; j < data.length; j++) {
+        if(data[j].month.substring(5, 7) == (i+1).toString()){
+                   Revenue[i] = data[j].revenue;
+        }
+      }
+    }
+    console.log("đây là revenue !")
+    // console.log(data[0].month.substring(5, 7))
+    console.log(Revenue)
+    // console.log(data[0].month)
+  })
+}
+returnGetYearlyRevenues()
 export const lineChartDataTotalSpent = [
   {
     name: "Revenue",
-    data: [50, 64, 48, 66, 49, 68],
+    data: Revenue,
     color: "#4318FF",
-  },
-  {
-    name: "Profit",
-    data: [30, 40, 24, 46, 20, 46],
-    color: "#6AD2FF",
   },
 ];
 
@@ -316,13 +332,13 @@ export const lineChartOptionsTotalSpent = {
     labels: {
       style: {
         colors: "#A3AED0",
-        fontSize: "12px",
+        fontSize: "13px",
         fontWeight: "500",
       },
     },
     type: "text",
     range: undefined,
-    categories: ["SEP", "OCT", "NOV", "DEC", "JAN", "FEB"],
+    categories: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
   },
 
   yaxis: {

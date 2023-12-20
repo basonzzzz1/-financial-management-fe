@@ -9,7 +9,7 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userToken: {...state.userToken, ...userToken},
-            }
+            };
         case 'set':
             return { ...state, ...action };
         default:

@@ -5,8 +5,9 @@ import "./index.css";
 import App from "./App";
 import {Provider} from "react-redux";
 import store from "./redux/store/store";
-import {Suspense} from "react";
-
+import React, {Suspense} from "react";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const loading = (
     <div className="pt-3 text-center">
@@ -18,6 +19,7 @@ root.render(
         <BrowserRouter>
           <Suspense fallback={loading}>
             <App/>
+              <ToastContainer/>
           </Suspense>
         </BrowserRouter>
     </Provider>

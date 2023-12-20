@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   MdArrowDropUp,
   MdOutlineCalendarToday,
-  MdBarChart,
+  MdBarChart, MdArrowDropDown,
 } from "react-icons/md";
 import Card from "components/card";
 import {
@@ -10,8 +10,52 @@ import {
   lineChartOptionsTotalSpent,
 } from "variables/charts";
 import LineChart from "components/charts/LineChart";
+import ManageService from "../../../../service/ManageService";
 
 const TotalSpent = () => {
+  const [totalInputThisMonth, setTotalInputThisMonth] = useState({});
+  const [totalOutputThisMonth, setTotalOutputThisMonth] = useState({});
+  const [expenseInUser, setExpenseInUser] = useState({});
+  const [percentageChange, setPercentageChange] = useState(null);
+  const [load, setLoad] = useState(true);
+  useEffect(() => {
+    returnTotalInputMonth()
+    returnTotalOutputMonth()
+    returnExpenseInUser()
+    setLoad(false)
+  }, [load]);
+  useEffect(() => {
+    calculatePercentageChange(totalInputThisMonth.totalInput, totalOutputThisMonth.totalOutput);
+  }, [expenseInUser]);
+
+  const returnTotalInputMonth = () => {
+    ManageService.TotalInputMonth().then((response) => {
+      setTotalInputThisMonth(response.data)
+      console.log(response)
+
+    })
+  }
+  const returnTotalOutputMonth = () => {
+    ManageService.TotalOutputMonth().then((response) => {
+      setTotalOutputThisMonth(response.data)
+      console.log(response)
+    })
+  }
+  const returnExpenseInUser = () => {
+    ManageService.ExpenseInUserLog().then((response) => {
+      console.log(response)
+      setExpenseInUser(response.data)
+    })
+  }
+  const calculatePercentageChange = (totalInput, totalOutput) => {
+    if (totalInput !== 0) {
+      const changePercentage = ((totalInput - totalOutput) / totalInput) * 100;
+      setPercentageChange(changePercentage.toFixed(2));
+    } else {
+      setPercentageChange(null);
+    }
+  };
+
   return (
     <Card extra="!p-[20px] text-center">
       <div className="flex justify-between">
@@ -27,13 +71,28 @@ const TotalSpent = () => {
       <div className="flex h-full w-full flex-row justify-between sm:flex-wrap lg:flex-nowrap 2xl:overflow-hidden">
         <div className="flex flex-col">
           <p className="mt-[20px] text-3xl font-bold text-navy-700 dark:text-white">
-            $37.5K
+            {(Math.round((expenseInUser.totalAmount)))/1000+'K'}
           </p>
           <div className="flex flex-col items-start">
             <p className="mt-2 text-sm text-gray-600">Total Spent</p>
             <div className="flex flex-row items-center justify-center">
-              <MdArrowDropUp className="font-medium text-green-500" />
-              <p className="text-sm font-bold text-green-500"> +2.45% </p>
+
+              {percentageChange > 50 ?
+                  <>
+                    <MdArrowDropUp className="font-medium text-green-500" />
+                    <p className="text-sm font-bold text-green-500">
+                      {'+'+(Math.round((50 - percentageChange)*1000)/1000)+'%'}
+                    </p>
+                  </>
+                   :
+                  <>
+                    <MdArrowDropDown className="font-medium text-red-500" />
+                    <p className="text-sm font-bold text-red-500">
+                      {'-'+(Math.round((50 - percentageChange)*1000)/1000)+'%'}
+                    </p>
+                  </>
+              }
+
             </div>
           </div>
         </div>
