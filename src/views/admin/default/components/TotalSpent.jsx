@@ -6,7 +6,6 @@ import {
 } from "react-icons/md";
 import Card from "components/card";
 import {
-  lineChartDataTotalSpent,
   lineChartOptionsTotalSpent,
 } from "variables/charts";
 import LineChart from "components/charts/LineChart";
@@ -16,12 +15,14 @@ const TotalSpent = () => {
   const [totalInputThisMonth, setTotalInputThisMonth] = useState({});
   const [totalOutputThisMonth, setTotalOutputThisMonth] = useState({});
   const [expenseInUser, setExpenseInUser] = useState({});
+  const [lineChartData, setLineChartData] = useState([]);
   const [percentageChange, setPercentageChange] = useState(null);
   const [load, setLoad] = useState(true);
   useEffect(() => {
     returnTotalInputMonth()
     returnTotalOutputMonth()
     returnExpenseInUser()
+    dataRevenueNew()
     setLoad(false)
   }, [load]);
   useEffect(() => {
@@ -55,6 +56,39 @@ const TotalSpent = () => {
       setPercentageChange(null);
     }
   };
+  useEffect(() => {
+    ManageService.GetYearlyRevenues().then((response) => {
+      var Revenue = [0,0,0,0,0,0,0,0,0,0,0,0];
+      var data = response.data;
+      for (let i = 0; i < Revenue.length+1; i++) {
+        for (let j = 0; j < data.length; j++) {
+          if(data[j].month.substring(5, 7) == (i+1).toString()){
+            Revenue[i] = data[j].revenue;
+          }
+        }
+      }
+      const lineChartData123 = [
+        {
+          name: "Revenue",
+          data: Revenue,
+          color: "#4318FF",
+        },
+      ];
+      setLineChartData(lineChartData123)
+    })
+  }, [load,localStorage.getItem("userToken")]);
+  const dataRevenueNew = () => {
+    const lineChartData123 = [
+      {
+        name: "Revenue",
+        data: [0,0,0,0,0,0,0,0,0,0,0,0],
+        color: "#4318FF",
+      },
+    ];
+      setLineChartData(lineChartData123)
+    console.log("34536")
+    console.log(lineChartData123)
+  }
 
   return (
     <Card extra="!p-[20px] text-center">
@@ -97,10 +131,9 @@ const TotalSpent = () => {
           </div>
         </div>
         <div className="h-full w-full">
-          <LineChart
+          {localStorage.getItem("userToken") != null ? <LineChart
             options={lineChartOptionsTotalSpent}
-            series={lineChartDataTotalSpent}
-          />
+          series={lineChartData}/> : <></>}
         </div>
       </div>
     </Card>

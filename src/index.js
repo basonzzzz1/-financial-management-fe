@@ -15,12 +15,12 @@ const loading = (
     </div>
 )
 root.render(
-    <Provider store={store}>
-        <BrowserRouter>
-          <Suspense fallback={loading}>
-            <App/>
-              <ToastContainer/>
-          </Suspense>
-        </BrowserRouter>
-    </Provider>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Suspense fallback={loading}>
+                    <App/>
+                    <ToastContainer/>
+                </Suspense>
+            </BrowserRouter>
+        </Provider>
 );

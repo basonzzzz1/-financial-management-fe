@@ -1,6 +1,3 @@
-import ManageService from "../service/ManageService";
-import {useEffect} from "react";
-
 export const barChartDataDailyTraffic = [
   {
     name: "Daily Traffic",
@@ -259,28 +256,15 @@ export const barChartOptionsWeeklyRevenue = {
     },
   },
 };
-var Revenue = [0,0,0,0,0,0,0,0,0,0,0,0];
-const returnGetYearlyRevenues = () => {
-  ManageService.GetYearlyRevenues().then((response) => {
-    var data = response.data;
-    for (let i = 0; i < Revenue.length+1; i++) {
-      for (let j = 0; j < data.length; j++) {
-        if(data[j].month.substring(5, 7) == (i+1).toString()){
-                   Revenue[i] = data[j].revenue;
-        }
-      }
-    }
-    console.log("đây là revenue !")
-    // console.log(data[0].month.substring(5, 7))
-    console.log(Revenue)
-    // console.log(data[0].month)
-  })
-}
-returnGetYearlyRevenues()
+
+
+
+
+
 export const lineChartDataTotalSpent = [
   {
     name: "Revenue",
-    data: Revenue,
+    data: [0,0,0,0,0,0,0,0,0,0,0,0],
     color: "#4318FF",
   },
 ];
