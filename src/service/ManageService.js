@@ -5,9 +5,9 @@ import {
     ExpenseInUser, OutPut,
     TotalInputThisMonth,
     TotalOutputThisMonth,
-    YearlyRevenues
+    YearlyRevenues,
+    Input, InputType
 } from "../API/api";
-import {Input} from "postcss";
     const ManageService = {
     TotalInputMonth: () => {
         return new Promise((resolve, reject) => {
@@ -135,9 +135,9 @@ import {Input} from "postcss";
                     });
             });
         },
-        GetInput: () => {
+        PostInput: (input) => {
             return new Promise((resolve, reject) => {
-                axios.get(Input,
+                axios.post(Input,input,
                     {
                         headers: {
                             "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
@@ -153,9 +153,27 @@ import {Input} from "postcss";
                     });
             });
         },
-        GetOutPut: () => {
+        PostOutPut: (outPut) => {
             return new Promise((resolve, reject) => {
-                axios.get(OutPut,
+                axios.post(OutPut,outPut,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        resolve(response);
+                        console.log(response)
+                    })
+                    .catch(function (err) {
+                        reject(err)
+                    });
+            });
+        },
+        GetInputType: () => {
+            return new Promise((resolve, reject) => {
+                axios.get(InputType,
                     {
                         headers: {
                             "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),

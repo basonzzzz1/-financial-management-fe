@@ -9,3 +9,4 @@ export const AllInput = `http://localhost:8080/management/all/input`;
 export const OutPut = `http://localhost:8080/management/output`;
 export const AllOutPut = `http://localhost:8080/management/all/output`;
 export const AllCategories = `http://localhost:8080/management/all/category`;
+export const InputType = `http://localhost:8080/management/inputType`;

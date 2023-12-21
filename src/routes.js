@@ -14,7 +14,7 @@ import {
 
 const routes = [
   {
-    name: "Main Dashboard",
+    name: "Trang chủ",
     layout: "/admin",
     path: "default",
     icon: <MdHome className="h-6 w-6" />,

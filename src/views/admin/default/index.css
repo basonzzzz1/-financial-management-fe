@@ -33,7 +33,7 @@
 }
 #div-formSpending {
     width: 250px;
-    height: 540px;
+    height: 290px;
     transform: translateX(910px) translateY(60px);
     position: absolute;
     border-radius: 8px;
@@ -42,6 +42,14 @@
     -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: transparent transparent; /* For Firefox */
+}
+#div-formIncome{
+    width: 250px;
+    height: 290px;
+    transform: translateX(910px) translateY(60px);
+    position: absolute;
+    border-radius: 8px;
+    background-color: white;
 }
 
 #div-formSpending::-webkit-scrollbar {
@@ -68,11 +76,144 @@
 /*}*/
 .h2-categories{
     margin-left: 10px;
-    background-color: #f2f2ff;
+    background-color: #3000ff !important;
+    color: white;
     border-radius: 5px;
     text-align: center;
+    /*font-weight: bold;*/
+    margin-top: 5px;
 }
 .li-categories{
     margin-left: 10px;
     text-align: center;
+    background-color: #f3f3ff;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+.h2-inputType{
+    margin-left: 10px;
+    text-align: center;
+    background-color: #f3f3ff;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+#input-spending{
+    margin-left: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+#input-income{
+    margin-left: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 165px;
+}
+#input-income ::placeholder {
+    text-align: center;
+}
+#input-spending ::placeholder {
+    text-align: center;
+}
+#button-spending{
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: #3000ff !important;
+    color: white;
+    padding: 1px;
+}
+#button-income{
+    margin-left: 5px;
+    border-radius: 5px;
+    background-color: #3000ff !important;
+    color: white;
+    padding: 1px;
+}
+#Button-Spending-Limit{
+    margin-top: 10px;
+    border-radius: 5px;
+    height: 40px;
+    width: 160px;
+    background-color: #3000ff !important;
+    color: white;
+    padding: 1px;
+}
+#input-Spending-Limit{
+    margin-top: 10px;
+    border-radius: 5px;
+    height: 40px;
+    width: 360px;
+    background-color: white !important;
+    color: white;
+    padding: 1px;
+    margin-left: 10px;
+}
+#button-input-Spending-Limit{
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 40px;
+    width: 160px;
+    background-color: #3000ff !important;
+    color: white;
+    padding: 1px;
+    transform: translateX(198px) translateY(0px);
+    position: absolute;
+    text-align: center;
+}
+#input-value{
+    transform: translateX(0px) translateY(0px);
+    position: absolute;
+    width: 197px;
+    height: 40px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
+    text-align: center;
+    color: black;
+}
+table {
+    width: 550px;
+    border-collapse: collapse;
+    margin-top: 20px;
+
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+th {
+    background-color: #3000ff !important;
+    color: white;
+}
+
+#table-spending {
+    width: 570px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    overflow-y: scroll;
+    height: 450px;
+}
+
+#table-spending::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+#table-income{
+    margin-top: 20px;
+    border-collapse: collapse;
+    overflow-y: scroll;
+    height: 450px;
+}
+#table-income ::-webkit-scrollbar{
+    width: 0;
+    display: none;
 }
