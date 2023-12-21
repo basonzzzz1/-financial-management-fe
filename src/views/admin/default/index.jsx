@@ -285,7 +285,7 @@ const Dashboard = () => {
                         <tr>
                             <td>{formatDateTime(ao.createAt)}</td>
                             <td>{ao.expenseType}</td>
-                            <td>{ao.money}</td>
+                            <td>{ao.money}  VND</td>
                         </tr>
                             ))}
                         </tbody>
@@ -308,7 +308,7 @@ const Dashboard = () => {
                             <tr>
                                 <td>{formatDateTime(ai.createAt)}</td>
                                 <td>{ai.title}</td>
-                                <td>{ai.money}</td>
+                                <td>{ai.money} VND</td>
                             </tr>
                         ))}
                         </tbody>

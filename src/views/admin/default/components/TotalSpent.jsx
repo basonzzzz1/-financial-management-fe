@@ -22,6 +22,7 @@ const TotalSpent = () => {
     const [percentageChange, setPercentageChange] = useState(null);
     const [changeText, setChangeText] = useState("");
     const [isLimit, setIsLimit] = useState(false);
+    const [isCheck, setIsCheck] = useState(true);
     const [load, setLoad] = useState(true);
     useEffect(() => {
         returnAllInput()
@@ -94,8 +95,10 @@ const TotalSpent = () => {
     const tapInLimit = () => {
       if(isLimit == true){
           setIsLimit(false)
+          setIsCheck(true)
       }else {
           setIsLimit(true)
+          setIsCheck(false)
       }
     }
     useEffect(() => {
@@ -119,8 +122,6 @@ const TotalSpent = () => {
                 const monthIndex = parseInt(allOutput[i].createAt.substring(5, 7)) - 1;
                 LineChartOutput[monthIndex] += allOutput[i].money;
             }
-
-
 
             const lineChartData123 = [
                 {
@@ -183,7 +184,7 @@ const TotalSpent = () => {
                     <button
                         className="linear mt-1 flex items-center justify-center gap-2 rounded-lg bg-lightPrimary p-2 text-gray-600 transition duration-200 hover:cursor-pointer hover:bg-gray-100 active:bg-gray-200 dark:bg-navy-700 dark:hover:opacity-90 dark:active:opacity-80">
                         <MdOutlineCalendarToday/>
-                        <span className="text-sm font-medium text-gray-600">This month</span>
+                        <span className="text-sm font-medium text-gray-600">Các tháng</span>
                     </button>
                     <button
                         className="!linear z-[1] flex items-center justify-center rounded-lg bg-lightPrimary p-2 text-brand-500 !transition !duration-200 hover:bg-gray-100 active:bg-gray-200 dark:bg-navy-700 dark:text-white dark:hover:bg-white/20 dark:active:bg-white/10">
@@ -198,7 +199,7 @@ const TotalSpent = () => {
                             {(Math.round((expenseInUser.totalAmount))) / 1000 + 'K'}
                         </p>
                         <div className="flex flex-col items-start">
-                            <p className="mt-2 text-sm text-gray-600">Total Spent</p>
+                            <p className="mt-2 text-sm text-gray-600">Chi tiêu</p>
                             <div className="flex flex-row items-center justify-center">
                                 {percentageChange < 0 ?
                                     <>
@@ -236,6 +237,7 @@ const TotalSpent = () => {
                     <input id={"input-value"} type="number" placeholder={"Hạn mức chi tiêu"}/>
                     <button id={"button-input-Spending-Limit"} onClick={()=>saveInLimit()}>Lưu</button>
                 </div> : <></>}
+                {isCheck ? <div><h1 style={{marginLeft : "20px", marginTop :"20px"}}>Hạn mức chi tiêu : {localStorage.getItem("limit")} VND</h1></div> : <></>}
             </div>
         </div>
     );
