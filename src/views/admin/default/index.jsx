@@ -1,8 +1,7 @@
 import MiniCalendar from "components/calendar/MiniCalendar";
 import TotalSpent from "views/admin/default/components/TotalSpent";
 import {IoMdHome} from "react-icons/io";
-import {IoDocuments} from "react-icons/io5";
-import {MdBarChart, MdDashboard} from "react-icons/md";
+import {MdBarChart, MdDashboard, MdLocalGroceryStore} from "react-icons/md";
 import Widget from "components/widget/Widget"
 import {useEffect, useState} from "react";
 import ManageService from "../../../service/ManageService";
@@ -124,7 +123,6 @@ const Dashboard = () => {
         } else {
             toast.error("chưa nhập số tiền thu nhập !")
         }
-
     }
     const handleClickLi = (name, id) => {
         setNameCategory(name);
@@ -201,7 +199,7 @@ const Dashboard = () => {
                     subtitle={`${totalInputThisMonth !== null ? totalInputThisMonth.totalInput+" VND" : ''}`}
                 />
                 <Widget
-                    icon={<IoDocuments className="h-6 w-6"/>}
+                    icon={<MdLocalGroceryStore className="h-6 w-6"/>}
                     title={"Chi tiêu tháng này"}
                     subtitle={`${totalOutputThisMonth !== null ? totalOutputThisMonth.totalOutput+" VND" : ''}`}
                 />

@@ -217,3 +217,77 @@ th {
     width: 0;
     display: none;
 }
+#myCustomModalId {
+    background-color: white !important;
+    border-radius: 5px;
+    height: 250px;
+    width: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    overflow-y: hidden;
+    border: 5px solid black;
+}
+
+#myCustomModalId ::-webkit-scrollbar {
+    display: none;
+}
+
+#myCustomModalId div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+
+#myCustomModalId h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+
+#myCustomModalId div > div {
+    margin-bottom: 15px;
+}
+
+
+#myCustomModalId p {
+    color: #3000ff !important;
+    font-weight: bold;
+}
+
+#miniCalendar-close-modal {
+    background-color: #3000ff !important;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    height: 30px;
+    width: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}
+#div-modal-1{
+    overflow-y: scroll;
+    display: flex;
+}
+#div-modal-1 ::-webkit-scrollbar {
+    display: none;
+}
+#div-modal-1 ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+#div-modal-2{
+    overflow-y: scroll;
+    display: flex;
+}
+#div-modal-2 ::-webkit-scrollbar {
+    display: none;
+}
+#div-modal-2 ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}

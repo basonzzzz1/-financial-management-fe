@@ -1,16 +1,11 @@
 import React from "react";
-
-// Admin Imports
 import MainDashboard from "views/admin/default";
-
-
-// Auth Imports
-
-// Icon Imports
 import {
   MdHome,
-  MdBarChart,
+  MdBarChart, MdLocalGroceryStore,
 } from "react-icons/md";
+import MainIncome from "./views/admin/income/income";
+import MainSpending from "./views/admin/spending/spending";
 
 const routes = [
   {
@@ -19,6 +14,20 @@ const routes = [
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
     component: <MainDashboard />,
+  },
+  {
+    name: "Trang Thu nhập",
+    layout: "/admin",
+    path: "icome",
+    icon: <MdBarChart  className="h-6 w-6" />,
+    component: <MainIncome />,
+  },
+  {
+    name: "Trang Chi tiêu",
+    layout: "/admin",
+    path: "spending",
+    icon: <MdLocalGroceryStore   className="h-6 w-6" />,
+    component: <MainSpending />,
   },
 ];
 export default routes;

@@ -6,7 +6,7 @@ import {
     TotalInputThisMonth,
     TotalOutputThisMonth,
     YearlyRevenues,
-    Input, InputType
+    Input, InputType, InPutEdit, OutPutEdit
 } from "../API/api";
     const ManageService = {
     TotalInputMonth: () => {
@@ -153,9 +153,45 @@ import {
                     });
             });
         },
+        PostInputEdit: (input) => {
+            return new Promise((resolve, reject) => {
+                axios.post(InPutEdit,input,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        resolve(response);
+                        console.log(response)
+                    })
+                    .catch(function (err) {
+                        reject(err)
+                    });
+            });
+        },
         PostOutPut: (outPut) => {
             return new Promise((resolve, reject) => {
                 axios.post(OutPut,outPut,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        resolve(response);
+                        console.log(response)
+                    })
+                    .catch(function (err) {
+                        reject(err)
+                    });
+            });
+        },
+        PostOutPutEdit: (outPut) => {
+            return new Promise((resolve, reject) => {
+                axios.post(OutPutEdit,outPut,
                     {
                         headers: {
                             "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
