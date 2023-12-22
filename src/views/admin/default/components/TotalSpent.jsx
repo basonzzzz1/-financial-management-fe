@@ -125,17 +125,17 @@ const TotalSpent = () => {
 
             const lineChartData123 = [
                 {
-                    name: "Revenue",
+                    name: "Doanh thu",
                     data: Revenue,
                     color: "#4318FF",
                 },
                 {
-                    name: "Income",
+                    name: "Thu nhập",
                     data: LineChartInput,
                     color: "#6AD2FF",
                 },
                 {
-                    name: "Spending",
+                    name: "Chi tiêu",
                     data: LineChartOutput,
                     color: "#bd1414",
                 },
