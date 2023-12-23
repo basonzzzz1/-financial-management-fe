@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import ManageService from "../../../service/ManageService";
 import {toast} from "react-toastify";
-import {MdEdit, MdSave} from "react-icons/md";
+import {MdDelete, MdEdit, MdSave} from "react-icons/md";
 
 const Spending = () => {
     const [allOutput, setAllOutput] = useState([]);
@@ -11,6 +11,8 @@ const Spending = () => {
     const [selectedOutputTypeE, setSelectedOutputTypeE] = useState('');
     const [editingRowId, setEditingRowId] = useState(null);
     const [editedMoney, setEditedMoney] = useState('');
+    const [searchDateOutput, setSearchDateOutput] = useState("");
+    const [searchMoneyOutput, setSearchMoneyOutput] = useState("");
     const [load, setLoad] = useState(true);
     useEffect(() => {
         returnAllOutput()
@@ -22,6 +24,12 @@ const Spending = () => {
             const sortedOutput = response.data.sort((a, b) => new Date(b.createAt) - new Date(a.createAt));
             setAllOutput(sortedOutput);
             setAllOutputSave(sortedOutput);
+        })
+    }
+    const deleteOutputId = (id) => {
+        ManageService.DeleteOutputId(id).then((response) => {
+            toast.success("xóa thành công !");
+            setLoad(true)
         })
     }
     const returnOutputType = () => {
@@ -70,10 +78,28 @@ const Spending = () => {
         console.log(e.target.value)
         setSelectedOutputTypeE(selectedValue)
     };
-
+    const handleSearchOutput = () => {
+        let filteredOutputs = allOutputSave;
+        if (searchDateOutput) {
+            filteredOutputs = filteredOutputs.filter(
+                (ao) => formatDateTime(ao.createAt).includes(searchDateOutput)
+            );
+        }
+        if (searchMoneyOutput) {
+            filteredOutputs = filteredOutputs.filter(
+                (ao) => ao.money.toString().includes(searchMoneyOutput)
+            );
+        }
+        setAllOutput(filteredOutputs);
+    };
     const handleEditedMoneyChange = (e) => {
         setEditedMoney(e.target.value);
     }
+    const resetSearch = () => {
+        setSearchDateOutput("");
+        setSearchMoneyOutput("");
+        setAllOutput(allOutputSave);
+    };
     const formatDateTime = (dateTimeString) => {
         const options = {
             year: 'numeric',
@@ -90,7 +116,7 @@ const Spending = () => {
             <div style={{textAlign: "center", width: "100%", backgroundColor: "#3000ff", color: "white"}}>
                 <h1 style={{fontWeight: "bold"}}>Lịch sử chi tiêu</h1>
             </div>
-            <div style={{width: "100%", marginBottom: "20px", marginTop: "15px"}}>
+            <div style={{width: "100%", marginBottom: "20px", marginTop: "15px" ,display : "flex"}}>
                 <div style={{width: "320px", marginLeft: "20px", display: "flex"}}>
                     <div style={{width: "150px"}}>
                         <label style={{}} htmlFor="outputType">Chọn loại chi tiêu : </label>
@@ -116,6 +142,41 @@ const Spending = () => {
                         ))}
                     </select>
                 </div>
+                <div style={{ width: "320px", marginLeft: "20px", display: "flex" }}>
+                    <div style={{ width: "150px" }}>
+                        <label style={{}} htmlFor="outputDate">
+                            Ngày tháng năm:
+                        </label>
+                    </div>
+                    <input
+                        type="text"
+                        style={{ border: "1px solid grey", borderRadius: "5px", textAlign: "center" }}
+                        id="outputDate"
+                        value={searchDateOutput}
+                        onChange={(e) => setSearchDateOutput(e.target.value)}
+                        placeholder="Nhập ngày tháng năm"
+                    />
+                </div>
+                <div style={{ width: "320px", marginLeft: "20px", display: "flex" }}>
+                    <div style={{ width: "150px" }}>
+                        <label style={{}} htmlFor="outputMoney">
+                            Số tiền:
+                        </label>
+                    </div>
+                    <input
+                        type="number"
+                        style={{ border: "1px solid grey", borderRadius: "5px", textAlign: "center", marginRight: "70px" }}
+                        id="outputMoney"
+                        value={searchMoneyOutput}
+                        onChange={(e) => setSearchMoneyOutput(e.target.value)}
+                        placeholder="Nhập số tiền"
+                    />
+                </div>
+                <div style={{display : "flex"}}>
+                    <button className={"button-input-search"} onClick={handleSearchOutput}>Tìm kiếm</button>
+                    <button className={"button-input-search"} onClick={resetSearch} style={{marginLeft : "20px"}}>Reset</button>
+                </div>
+
             </div>
             <table style={{width: "1185px", overflowY: "scroll"}}>
                 <thead>
@@ -164,8 +225,9 @@ const Spending = () => {
                             )}
                         </td>
                         <td style={{textAlign: "center", display: "flex", justifyContent: "center"}}><MdEdit
-                            onClick={() => handEditOutputChange(ao.id, ao.money,ao.expenseType)} style={{color:"red"}}/>
-                            {editingRowId == ao.id ? (<MdSave style={{marginLeft: "15px" , color:"blue"}} onClick={()=>PostOutputInUser()}/>) : <></>}</td>
+                            onClick={() => handEditOutputChange(ao.id, ao.money,ao.expenseType)} style={{color:"darkorange", fontSize : "22PX"}}/>
+                            <MdDelete style={{marginLeft :"15px" , color : "red" , fontSize : "22PX"}} onClick={()=>deleteOutputId(ao.id)}/>
+                            {editingRowId == ao.id ? (<MdSave style={{marginLeft: "15px" , color:"blue", fontSize : "22PX"}} onClick={()=>PostOutputInUser()}/>) : <></>}</td>
                     </tr>
                 ))}
                 </tbody>

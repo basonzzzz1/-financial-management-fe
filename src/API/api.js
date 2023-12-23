@@ -12,3 +12,6 @@ export const InPutEdit = `http://localhost:8080/management/inputEdit`;
 export const AllOutPut = `http://localhost:8080/management/all/output`;
 export const AllCategories = `http://localhost:8080/management/all/category`;
 export const InputType = `http://localhost:8080/management/inputType`;
+export const DeleteInput = `http://localhost:8080/management/delete-input/`;
+export const DeleteOutput = `http://localhost:8080/management/delete-output/`;
+// delete PathVariable {id}

@@ -6,7 +6,7 @@ import {
     TotalInputThisMonth,
     TotalOutputThisMonth,
     YearlyRevenues,
-    Input, InputType, InPutEdit, OutPutEdit
+    Input, InputType, InPutEdit, OutPutEdit, DeleteInput, DeleteOutput
 } from "../API/api";
     const ManageService = {
     TotalInputMonth: () => {
@@ -210,6 +210,42 @@ import {
         GetInputType: () => {
             return new Promise((resolve, reject) => {
                 axios.get(InputType,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        resolve(response);
+                        console.log(response)
+                    })
+                    .catch(function (err) {
+                        reject(err)
+                    });
+            });
+        },
+        DeleteInputId: (id) => {
+            return new Promise((resolve, reject) => {
+                axios.get(DeleteInput+id,
+                    {
+                        headers: {
+                            "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        resolve(response);
+                        console.log(response)
+                    })
+                    .catch(function (err) {
+                        reject(err)
+                    });
+            });
+        },
+        DeleteOutputId: (id) => {
+            return new Promise((resolve, reject) => {
+                axios.get(DeleteOutput+id,
                     {
                         headers: {
                             "Authorization": "Bearer " + JSON.parse(localStorage.getItem('userToken')),
